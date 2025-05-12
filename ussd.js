@@ -1,3 +1,4 @@
+
 // ✅ IMPORTS
 const express = require("express");
 const mysql = require("mysql2");
@@ -5,6 +6,7 @@ const bodyParser = require("body-parser");
 const { v4: uuidv4 } = require("uuid");
 const axios = require("axios");
 const base64 = require("base-64");
+
 const africastalking = require("africastalking")({
   apiKey: "atsk_7c38c9c5fb20203b9de4a174d32420ad15d6f3d9e65ca5b62bf3f1bb9189fad7d3199a20",
   username: "sandbox"
@@ -100,7 +102,7 @@ function logTransaction(userId, networkKey, volume, recipient, amount, phoneNumb
       transaction_id: ref,
       amount: formattedAmount,
       processing_code: "000200",
-      "r-switch": rSwitch, // ✅ FIXED KEY NAME
+      "r-switch": rSwitch,
       desc: "Data Purchase",
       subscriber_number: phoneNumber
     };

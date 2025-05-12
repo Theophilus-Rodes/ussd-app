@@ -1,17 +1,15 @@
 {
   "name": "vendor-backend",
   "version": "1.0.0",
+  "description": "USSD backend for vendor portal",
   "main": "ussd.js",
   "scripts": {
-    "start": "node ussd.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ussd.js"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Theophilus",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "africastalking": "https://github.com/AfricasTalkingLtd/africastalking-node.git",
+    "africastalking": "^1.2.0",
     "axios": "^1.6.7",
     "base-64": "^1.0.0",
     "bcrypt": "^5.1.1",
