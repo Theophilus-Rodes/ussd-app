@@ -11,7 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "africastalking": "^1.2.0",
+    "africastalking": "^1.1.0",
     "axios": "^1.6.7",
     "base-64": "^1.0.0",
     "bcrypt": "^5.1.1",
