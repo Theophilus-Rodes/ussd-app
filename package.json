@@ -11,7 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "africastalking": "git+https://github.com/AfricasTalkingLtd/africastalking-node.git",
+    "africastalking": "https://github.com/AfricasTalkingLtd/africastalking-node.git",
     "axios": "^1.6.7",
     "base-64": "^1.0.0",
     "bcrypt": "^5.1.1",
