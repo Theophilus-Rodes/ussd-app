@@ -13,17 +13,18 @@ const port = 5050;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// ✅ DATABASE CONNECTION
+// ✅ DATABASE CONNECTION (RAILWAY)
 const db = mysql.createConnection({
-  host: "localhost",
+  host: "hopper.proxy.rlwy.net",
   user: "root",
-  password: "",
-  database: "vendor_portal"
+  password: "bVaRXYBnYMeeSrnJgxDMacLnUYxxyzhN",
+  database: "railway",
+  port: 23552
 });
 
 db.connect(err => {
-  if (err) console.error("Database connection failed:", err);
-  else console.log("Connected to MySQL database.");
+  if (err) console.error("❌ Database connection failed:", err);
+  else console.log("✅ Connected to Railway MySQL database.");
 });
 
 // ✅ THETELLER CONFIG
@@ -162,7 +163,7 @@ app.post("/api/ussd", (req, res) => {
 
     return res.send("END Invalid option");
   } catch (err) {
-    console.error("USSD error:", err.message);
+    console.error("❌ USSD error:", err.message);
     return res.send("END Something went wrong. Try again later.");
   }
 });
