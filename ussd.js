@@ -105,11 +105,11 @@ function logTransaction(userId, networkKey, volume, recipient, amount, phoneNumb
   });
 }
 
-// ✅ USSD ENDPOINT (NOW SUPPORTS 'data' AND 'msisdn')
+// ✅ USSD ENDPOINT (NOW SUPPORTS 'text' or 'data' + 'msisdn')
 app.post("/api/ussd", (req, res) => {
   try {
-    const text = req.body?.data || req.body?.text || "";
-    const phoneNumber = req.body?.msisdn || req.body?.phoneNumber || "";
+    const text = req.body?.text || req.body?.data || "";
+    const phoneNumber = req.body?.phoneNumber || req.body?.msisdn || "";
 
     if (!text) {
       console.error("❌ USSD request received with missing input:", req.body);
