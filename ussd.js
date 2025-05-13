@@ -105,10 +105,17 @@ function logTransaction(userId, networkKey, volume, recipient, amount, phoneNumb
   });
 }
 
-// ✅ USSD ENDPOINT
+// ✅ USSD ENDPOINT (WITH SAFETY FIX)
 app.post("/api/ussd", (req, res) => {
   try {
-    let { text, phoneNumber } = req.body;
+    const text = req.body?.text || "";
+    const phoneNumber = req.body?.phoneNumber || "";
+
+    if (!text) {
+      console.error("❌ USSD request received with missing 'text' field:", req.body);
+      return res.send("END Invalid USSD request. Please try again.");
+    }
+
     if (text.startsWith("*203*555*") && text.endsWith("#")) {
       text = text.replace("*203*555*", "").replace("#", "");
     }
