@@ -105,10 +105,10 @@ function logTransaction(userId, networkKey, volume, recipient, amount, phoneNumb
   });
 }
 
-// ✅ USSD ENDPOINT (NOW SUPPORTS 'text' or 'data' + 'msisdn')
+// ✅ USSD ENDPOINT
 app.post("/api/ussd", (req, res) => {
   try {
-    const text = req.body?.text || req.body?.data || "";
+    let text = req.body?.text || req.body?.data || "";
     const phoneNumber = req.body?.phoneNumber || req.body?.msisdn || "";
 
     if (!text) {
