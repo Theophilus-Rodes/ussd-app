@@ -1,4 +1,3 @@
-
 // ✅ IMPORTS
 const express = require("express");
 const mysql = require("mysql2");
@@ -6,12 +5,6 @@ const bodyParser = require("body-parser");
 const { v4: uuidv4 } = require("uuid");
 const axios = require("axios");
 const base64 = require("base-64");
-
-const africastalking = require("africastalking")({
-  apiKey: "atsk_7c38c9c5fb20203b9de4a174d32420ad15d6f3d9e65ca5b62bf3f1bb9189fad7d3199a20",
-  username: "sandbox"
-});
-const sms = africastalking.SMS;
 
 const app = express();
 const port = 5050;
@@ -60,20 +53,7 @@ function fetchPlans(table, userId, callback) {
   });
 }
 
-// ✅ HELPER: Send SMS
-function sendSMSNotification(to, message) {
-  sms.send({
-    to: [`+233${to.slice(-9)}`],
-    message,
-    from: "SANDYPAY"
-  }).then(response => {
-    console.log("✅ SMS sent:", response);
-  }).catch(error => {
-    console.error("❌ SMS sending failed:", error);
-  });
-}
-
-// ✅ HELPER: Send MoMo Prompt
+// ✅ HELPER: Send MoMo Prompt (without SMS)
 function logTransaction(userId, networkKey, volume, recipient, amount, phoneNumber, callback) {
   const ref = uuidv4().replace(/-/g, '').slice(0, 12);
   const network = networkKey?.toLowerCase();
@@ -116,7 +96,6 @@ function logTransaction(userId, networkKey, volume, recipient, amount, phoneNumb
         "Cache-Control": "no-cache"
       }
     }).then(() => {
-      sendSMSNotification(phoneNumber, `GHS${parseFloat(amount).toFixed(2)} purchase request sent. Approve payment.`);
       callback("END Please approve the MoMo prompt to complete payment.");
     }).catch(err => {
       console.error("❌ MoMo API error:", err.response?.data || err.message);
