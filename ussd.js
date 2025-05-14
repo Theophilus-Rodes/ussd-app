@@ -45,7 +45,6 @@ app.post("/ussd/moolre", (req, res) => {
     // Echo what was typed
     clearTimeout(timeout);
     return res.send(`END You entered: ${text}`);
-
   } catch (err) {
     clearTimeout(timeout);
     console.error("❌ USSD error:", err.message);
