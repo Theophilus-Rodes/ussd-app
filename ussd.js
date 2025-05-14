@@ -7,21 +7,30 @@ const port = 5050;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// USSD Test Route
+// ✅ USSD ENDPOINT - Moolre-friendly
 app.post("/ussd/moolre", (req, res) => {
   try {
     const text = req.body?.data || req.body?.text || "";
     const phoneNumber = req.body?.msisdn || req.body?.phoneNumber || "";
 
-    console.log("📩 Incoming USSD:", { text, phoneNumber });
+    console.log("📩 FULL Moolre Payload:", req.body);
+    console.log("🧾 Parsed:", { text, phoneNumber });
 
-    // Always respond with welcome message
-    return res.send("CON Welcome to SANDYPAY");
+    // ✅ Fallback for empty or first request
+    if (!text || text.trim() === "") {
+      return res.send("CON Welcome to SANDYPAY");
+    }
+
+    // ✅ Echo test (optional)
+    return res.send(`END You entered: ${text}`);
+
   } catch (err) {
-    console.error("❌ Error:", err.message);
-    return res.send("END Something went wrong.");
+    console.error("❌ USSD error:", err.message);
+    return res.send("END Something went wrong. Try again.");
   }
 });
 
-// Start server
-app.listen(port, () => console.log(`Minimal USSD test server running on http://localhost:${port}`));
+// ✅ START SERVER
+app.listen(port, () => {
+  console.log(`✅ Minimal USSD test server running on http://localhost:${port}`);
+});
